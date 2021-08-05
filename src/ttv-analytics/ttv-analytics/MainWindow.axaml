@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:TtvAnalytics.ViewModel"
+        xmlns:control="clr-namespace:TtvAnalytics.Control"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TtvAnalytics.MainWindow"
+        Title="ttv_analytics">
+
+    <Design.DataContext>
+        <viewModel:MainWindowViewModel />
+    </Design.DataContext>
+
+    <DockPanel Margin="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center">Account</TextBlock>
+            <control:TwitchAccountControl Grid.Row="1" DataContext="{Binding TwitchAccountViewModel}" />
+            <TextBlock Grid.Row="2" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center">Channels User Is In</TextBlock>
+            <control:TwitchChatViewerListControl Grid.Row="3" DataContext="{Binding TwitchChatViewerListViewModel}" />
+        </Grid>
+    </DockPanel>
+</Window>

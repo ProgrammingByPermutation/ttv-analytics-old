@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="clr-namespace:TtvAnalytics.ViewModel"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TtvAnalytics.Control.TwitchChatViewerListControl">
+
+    <Design.DataContext>
+        <viewModel:TwitchChatViewerListViewModel />
+    </Design.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Channel:</TextBlock>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TwitchChannel}" />
+        <Button Grid.Row="0" Grid.Column="2" IsEnabled="{Binding !IsRunning}" Command="{Binding GetChannelsUserIsIn}">Get Chats In</Button>
+        <Button Grid.Row="0" Grid.Column="3" IsEnabled="{Binding !IsRunning}"
+                Command="{Binding GetChannelsAllFollowersAreIn}">
+            Find Followers
+        </Button>
+        <ProgressBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Minimum="0" Maximum="100"
+                     Value="{Binding QueryProgress}" />
+        <ListBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Items="{Binding TwitchChatters}" />
+    </Grid>
+</UserControl>

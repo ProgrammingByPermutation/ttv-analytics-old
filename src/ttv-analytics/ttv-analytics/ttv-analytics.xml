@@ -1,0 +1,465 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ttv-analytics</name>
+    </assembly>
+    <members>
+        <member name="T:TtvAnalytics.App">
+            <summary>
+                The main entry point of the application.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.App.LOG">
+            <summary>
+                The logger.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.App.Initialize">
+            <summary>
+                The main initialization of the application.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.App.OnFrameworkInitializationCompleted">
+            <summary>
+                The initialization of the GUI after the application has initialized.
+            </summary>
+        </member>
+        <member name="T:TtvAnalytics.Configuration">
+            <summary>
+                The persistent configuration.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Configuration.CONFIG_FILENAME">
+            <summary>
+                The location the file should be saved and read from.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Configuration.instance">
+            <summary>
+                The singleton instance of the class.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Configuration.oauth">
+            <summary>
+                The OAuth token information.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Configuration.username">
+            <summary>
+                The username that we are tracking.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Configuration.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TtvAnalytics.Configuration" /> class.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.Configuration.Instance">
+            <summary>
+                Gets the singleton instance of the configuration.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.Configuration.Username">
+            <summary>
+                Gets or sets the username that we are tracking.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.Configuration.OAuth">
+            <summary>
+                Gets or sets the OAuth token information.
+            </summary>
+        </member>
+        <member name="E:TtvAnalytics.Configuration.PropertyChanged">
+            <summary>
+                The event invoked when properties change.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Configuration.Clone">
+            <summary>
+                Handles cloning this instance of the configuration into a new object.
+            </summary>
+            <returns>A new instance of the class.</returns>
+        </member>
+        <member name="M:TtvAnalytics.Configuration.ReadConfiguration">
+            <summary>
+                Read the configuration from disk.
+            </summary>
+            <returns>The configuration object.</returns>
+        </member>
+        <member name="M:TtvAnalytics.Configuration.WriteConfiguration">
+            <summary>
+                Write the configuration to disk.
+            </summary>
+            <returns>True if successful, false otherwise.</returns>
+        </member>
+        <member name="M:TtvAnalytics.Configuration.OnPropertyChanged(System.String)">
+            <summary>
+                Handles updating subscribers when properties change.
+            </summary>
+            <param name="propertyName">The property name, if not specified it will magically be figured out.</param>
+        </member>
+        <member name="M:TtvAnalytics.Configuration.OnPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+                Handles writing to the configuration file when the properties change.
+            </summary>
+            <param name="sender">The singleton instance of this class.</param>
+            <param name="e">The property arguments.</param>
+        </member>
+        <member name="T:TtvAnalytics.Configuration.OAuthToken">
+            <summary>
+                A representation of an OAuth token.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Configuration.OAuthToken.#ctor(System.String,System.String,System.DateTime)">
+            <summary>
+                Initializes a new instance of the <see cref="T:TtvAnalytics.Configuration.OAuthToken" /> class.
+            </summary>
+            <param name="token">The OAuth token.</param>
+            <param name="refreshToken">The token used to refresh the OAuth token when it expires.</param>
+            <param name="expiration">The date and time when the OAuth token has expired.</param>
+        </member>
+        <member name="P:TtvAnalytics.Configuration.OAuthToken.Token">
+            <summary>
+                Gets the OAuth token.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.Configuration.OAuthToken.RefreshToken">
+            <summary>
+                Gets the token used to refresh the OAuth token when it expires.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.Configuration.OAuthToken.TokenExpiration">
+            <summary>
+                Gets the date and time when the OAuth token has expired.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Configuration.OAuthToken.Clone">
+            <summary>
+                Clones this object.
+            </summary>
+            <returns>The new object.</returns>
+        </member>
+        <member name="T:TtvAnalytics.Constants">
+            <summary>
+                The constant values used throughout the application.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Constants.TWITCH_CLIENT_ID">
+            <summary>
+                The twitch client id from the developer console of the twitch website.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Constants.TWITCH_REDIRECT_URL">
+            <summary>
+                The URL to redirect to when asking twitch for an OAuth token.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Constants.TWITCH_REFRESH">
+            <summary>
+                The endpoint the refreshes an OAuth token.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Constants.TWITCH_SCOPES">
+            <summary>
+                The scopes requested when generating an OAuth token.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Constants.CLIPBOARD">
+            <summary>
+                The reference to the clipboard API.
+            </summary>
+            <remarks>This is a hack because it's hard to get to.</remarks>
+        </member>
+        <member name="T:TtvAnalytics.Control.TwitchAccountControl">
+            <summary>
+                Visualizes a twitch account.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Control.TwitchAccountControl.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TtvAnalytics.Control.TwitchAccountControl" /> class.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Control.TwitchAccountControl.InitializeComponent">
+            <summary>
+                Initializes the GUI components.
+            </summary>
+        </member>
+        <member name="T:TtvAnalytics.Control.TwitchChatViewerListControl">
+            <summary>
+                Visualizes the list of twitch chat viewers.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Control.TwitchChatViewerListControl.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TtvAnalytics.Control.TwitchChatViewerListControl" /> class.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Control.TwitchChatViewerListControl.InitializeComponent">
+            <summary>
+                Initializes the GUI components.
+            </summary>
+        </member>
+        <member name="T:TtvAnalytics.MainWindow">
+            <summary>
+                The main application window.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.MainWindow.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TtvAnalytics.MainWindow" /> class.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.MainWindow.InitializeComponent">
+            <summary>
+                Initializes the GUI.
+            </summary>
+        </member>
+        <member name="T:TtvAnalytics.Program">
+            <summary>
+                The main entry point of the application.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Program.Main(System.String[])">
+            <summary>
+                Initialization code. Don't use any Avalonia, third-party APIs or any
+                SynchronizationContext-reliant code before AppMain is called: things aren't initialized
+                yet and stuff might break.
+            </summary>
+            <param name="args">The args passed to the program.</param>
+        </member>
+        <member name="M:TtvAnalytics.Program.BuildAvaloniaApp">
+            <summary>
+                Avalonia configuration, don't remove; also used by visual designer.
+            </summary>
+            <returns>The Avalonia application.</returns>
+        </member>
+        <member name="T:TtvAnalytics.Utilities.TwitchClient">
+            <summary>
+                Wrappers the functionality of interacting with the Twitch API.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Utilities.TwitchClient.log">
+            <summary>
+                The logger.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.Utilities.TwitchClient.api">
+            <summary>
+                A cached instance of the API to use between calls.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Utilities.TwitchClient.GetTwitchClientApi">
+            <summary>
+                Gets or creates a new API object.
+            </summary>
+            <returns>The <see cref="T:TwitchLib.Api.TwitchAPI" /> object if successful, null otherwise.</returns>
+        </member>
+        <member name="M:TtvAnalytics.Utilities.TwitchClient.GetTwitchChatters(System.String)">
+            <summary>
+                Retrieve the list of people joined to a channel's chat.
+            </summary>
+            <param name="channel">The username of the channel.</param>
+            <returns>The collection of twitch usernames that are in a chat if successful, null otherwise.</returns>
+        </member>
+        <member name="M:TtvAnalytics.Utilities.TwitchClient.GetChannelFollows(System.String,System.String)">
+            <summary>
+                Retrieves either the people following a user or the people a user is following.
+            </summary>
+            <param name="usernameFollowing">If specified, the username to find who they are following.</param>
+            <param name="usernameBeingFollowed">If specified, the username to find who is following them.</param>
+            <remarks>
+                You must specify either the <paramref name="usernameFollowing"/> or the <paramref name="usernameBeingFollowed" />
+                but not both.
+            </remarks>
+            <returns>A collection of users if successful, null otherwise.</returns>
+        </member>
+        <member name="M:TtvAnalytics.Utilities.TwitchClient.GetLiveChannels(System.String[])">
+            <summary>
+                Determine which channels from a collection of channels is currently live.
+            </summary>
+            <param name="channelIds">The channel ids to check.</param>
+            <returns>The collection of live streams, if successful, null otherwise.</returns>
+        </member>
+        <member name="T:TtvAnalytics.ViewModel.MainWindowViewModel">
+            <summary>
+                The view model for the main application page.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.ViewModel.MainWindowViewModel.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TtvAnalytics.ViewModel.MainWindowViewModel" /> class.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.ViewModel.MainWindowViewModel.TwitchAccountViewModel">
+            <summary>
+                Gets or sets the view model for the twitch accounts.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.ViewModel.MainWindowViewModel.TwitchChatViewerListViewModel">
+            <summary>
+                Gets or sets the view model for the twitch chat viewer.
+            </summary>
+        </member>
+        <member name="T:TtvAnalytics.ViewModel.TwitchAccountViewModel">
+            <summary>
+                The view model tracking and updating the.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.ViewModel.TwitchAccountViewModel.oauthCheckTimer">
+            <summary>
+                The timer that looks for the copied OAuth token on the clipboard.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.ViewModel.TwitchAccountViewModel.oauth">
+            <summary>
+                The JSON representation of the OAuth token. <seealso cref="T:TtvAnalytics.Configuration.OAuthToken" />
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.ViewModel.TwitchAccountViewModel.username">
+            <summary>
+                The twitch username to track.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.ViewModel.TwitchAccountViewModel.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TtvAnalytics.ViewModel.TwitchAccountViewModel" /> class.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.ViewModel.TwitchAccountViewModel.Username">
+            <summary>
+                Gets or sets the twitch username to track.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.ViewModel.TwitchAccountViewModel.OAuth">
+            <summary>
+                Gets or sets the JSON representation of the OAuth token. <seealso cref="T:TtvAnalytics.Configuration.OAuthToken" />
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.ViewModel.TwitchAccountViewModel.GetOAuthToken">
+            <summary>
+                Retrieves an OAuth token from twitch.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.ViewModel.TwitchAccountViewModel.OauthCodeCheckTimer_Elapsed(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+                Periodically checks to see if the <seealso cref="T:ttv_analytics.Model.SpringOAuthResponse" /> JSON is on the clipboard
+                from the OAuth website.
+            </summary>
+            <param name="sender">The timer.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="M:TtvAnalytics.ViewModel.TwitchAccountViewModel.OnPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+                Handles updating the configuration file with the changes in the GUI.
+            </summary>
+            <param name="sender">This object instance.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="T:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel">
+            <summary>
+                The view model for performing Ad Hoc searches for twitch viewers.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.LOG">
+            <summary>
+                The logger.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.isRunning">
+            <summary>
+                A value indicating whether the query is currently running.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.queryProgress">
+            <summary>
+                The value between 0-100 for how far into the query we are.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.twitchChannel">
+            <summary>
+                The twitch channel to search for.
+            </summary>
+        </member>
+        <member name="F:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.twitchChatters">
+            <summary>
+                The list of chatters.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.TwitchChannel">
+            <summary>
+                Gets or sets the twitch channel to search for.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.TwitchChatters">
+            <summary>
+                Gets or sets the list of chatters.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.IsRunning">
+            <summary>
+                Gets or sets a value indicating whether the query is currently running.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.QueryProgress">
+            <summary>
+                Gets or sets the value between 0-100 for how far into the query we are.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.GetChannelsUserIsIn">
+            <summary>
+                Retrieves the list of users in a channel's chat.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.GetChannelsAllFollowersAreIn">
+            <summary>
+                Retrieves the list of all followers of a channel and what chats they're currently in.
+            </summary>
+        </member>
+        <member name="T:TtvAnalytics.ViewModel.ViewModelBase">
+            <summary>
+                The base view for common functionality.
+            </summary>
+        </member>
+        <member name="T:ttv_analytics.Model.SpringOAuthRefreshResponse">
+            <summary>
+                The JSON response to a request for a OAuth refresh.
+            </summary>
+        </member>
+        <member name="P:ttv_analytics.Model.SpringOAuthRefreshResponse.access_token">
+            <summary>
+                The new OAuth token.
+            </summary>
+        </member>
+        <member name="P:ttv_analytics.Model.SpringOAuthRefreshResponse.expires_in">
+            <summary>
+                The time in "seconds" until the token expires.
+            </summary>
+        </member>
+        <member name="P:ttv_analytics.Model.SpringOAuthRefreshResponse.refresh_token">
+            <summary>
+                The refresh token to request a new OAuth token.
+            </summary>
+        </member>
+        <member name="T:ttv_analytics.Model.SpringOAuthResponse">
+            <summary>
+                The JSON response to a request for a new OAuth token.
+            </summary>
+        </member>
+        <member name="P:ttv_analytics.Model.SpringOAuthResponse.token">
+            <summary>
+                The new OAuth token.
+            </summary>
+        </member>
+        <member name="P:ttv_analytics.Model.SpringOAuthResponse.expires_in">
+            <summary>
+                The time in "seconds" until the token expires.
+            </summary>
+        </member>
+        <member name="P:ttv_analytics.Model.SpringOAuthResponse.refresh_token">
+            <summary>
+                The refresh token to request a new OAuth token.
+            </summary>
+        </member>
+    </members>
+</doc>
