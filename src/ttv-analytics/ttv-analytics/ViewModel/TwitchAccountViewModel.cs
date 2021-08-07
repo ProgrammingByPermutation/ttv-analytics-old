@@ -34,7 +34,7 @@
             this.oauthCheckTimer.Elapsed += this.OauthCodeCheckTimer_Elapsed;
 
             // Load the configuration from the life.
-            this.Username = Configuration.Instance.Username;
+            this.Username = Configuration.Instance.TwitchUsername;
             if (null != Configuration.Instance.OAuth && !string.IsNullOrWhiteSpace(Configuration.Instance.OAuth.Token)) {
                 this.OAuth = JsonConvert.SerializeObject(Configuration.Instance.OAuth);
             }
@@ -109,7 +109,7 @@
         /// <param name="e">The event arguments.</param>
         private void OnPropertyChanged(object? sender, PropertyChangedEventArgs e) {
             if (nameof(TwitchAccountViewModel.Username).Equals(e.PropertyName)) {
-                Configuration.Instance.Username = this.Username;
+                Configuration.Instance.TwitchUsername = this.Username;
             } else if (nameof(TwitchAccountViewModel.OAuth).Equals(e.PropertyName)) {
                 if (string.IsNullOrWhiteSpace(this.OAuth)) {
                     return;

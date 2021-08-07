@@ -14,6 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -22,15 +23,16 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Channel:</TextBlock>
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TwitchChannel}" />
-        <Button Grid.Row="0" Grid.Column="2" IsEnabled="{Binding !IsRunning}" Command="{Binding GetChannelsUserIsIn}">Get Chats In</Button>
-        <Button Grid.Row="0" Grid.Column="3" IsEnabled="{Binding !IsRunning}"
-                Command="{Binding GetChannelsAllFollowersAreIn}">
+        <CheckBox Grid.Row="0" Grid.Column="0" IsChecked="{Binding ContinuallyRun}">Continually Run</CheckBox>
+        <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Channel:</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TwitchChannel}" />
+        <Button Grid.Row="1" Grid.Column="2" IsEnabled="{Binding !IsRunning}" Command="{Binding GetChannelsUserIsIn}">Get Chats In</Button>
+        <Button Grid.Row="1" Grid.Column="3" IsEnabled="{Binding !IsRunning}"
+                Command="{Binding GetChannelsAllFollowersAreInCommand}">
             Find Followers
         </Button>
-        <ProgressBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Minimum="0" Maximum="100"
+        <ProgressBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Minimum="0" Maximum="100"
                      Value="{Binding QueryProgress}" />
-        <ListBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Items="{Binding TwitchChatters}" />
+        <ListBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Items="{Binding TwitchChatters}" />
     </Grid>
 </UserControl>

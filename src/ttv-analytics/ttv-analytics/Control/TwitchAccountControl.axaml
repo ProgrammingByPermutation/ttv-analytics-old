@@ -21,7 +21,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Username:</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Channel:</TextBlock>
         <TextBox Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Text="{Binding Username}" />
 
         <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">API OAuth:</TextBlock>

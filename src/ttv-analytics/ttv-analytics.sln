@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ttv-analytics-test", "ttv-analytics-test\ttv-analytics-test.csproj", "{8C111AB4-D9A7-49F3-B4E3-4D1FD300F8FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{B3BF9C16-CD3D-48E3-92AA-8F96846ABA29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3BF9C16-CD3D-48E3-92AA-8F96846ABA29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3BF9C16-CD3D-48E3-92AA-8F96846ABA29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C111AB4-D9A7-49F3-B4E3-4D1FD300F8FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C111AB4-D9A7-49F3-B4E3-4D1FD300F8FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C111AB4-D9A7-49F3-B4E3-4D1FD300F8FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C111AB4-D9A7-49F3-B4E3-4D1FD300F8FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

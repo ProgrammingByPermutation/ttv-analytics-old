@@ -106,7 +106,7 @@
         /// <param name="usernameFollowing">If specified, the username to find who they are following.</param>
         /// <param name="usernameBeingFollowed">If specified, the username to find who is following them.</param>
         /// <remarks>
-        ///     You must specify either the <paramref name="usernameFollowing"/> or the <paramref name="usernameBeingFollowed" />
+        ///     You must specify either the <paramref name="usernameFollowing" /> or the <paramref name="usernameBeingFollowed" />
         ///     but not both.
         /// </remarks>
         /// <returns>A collection of users if successful, null otherwise.</returns>

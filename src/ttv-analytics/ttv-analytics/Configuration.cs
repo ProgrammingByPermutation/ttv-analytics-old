@@ -5,12 +5,18 @@
     using System.Runtime.CompilerServices;
     using System.Text;
     using JetBrains.Annotations;
+    using log4net;
     using Newtonsoft.Json;
 
     /// <summary>
     ///     The persistent configuration.
     /// </summary>
     public class Configuration : INotifyPropertyChanged {
+        /// <summary>
+        ///     The logger.
+        /// </summary>
+        private static readonly ILog LOG = LogManager.GetLogger(typeof(Configuration));
+
         /// <summary>
         ///     The location the file should be saved and read from.
         /// </summary>
@@ -21,15 +27,17 @@
         /// </summary>
         private static Configuration? instance;
 
+        private DatabaseConfiguration? databaseConfig;
+
         /// <summary>
         ///     The OAuth token information.
         /// </summary>
         private OAuthToken? oauth;
 
         /// <summary>
-        ///     The username that we are tracking.
+        ///     The twitchUsername that we are tracking.
         /// </summary>
-        private string? username;
+        private string? twitchUsername;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Configuration" /> class.
@@ -51,12 +59,12 @@
         }
 
         /// <summary>
-        ///     Gets or sets the username that we are tracking.
+        ///     Gets or sets the twitchUsername that we are tracking.
         /// </summary>
-        public string? Username {
-            get => this.username;
+        public string? TwitchUsername {
+            get => this.twitchUsername;
             set {
-                this.username = value;
+                this.twitchUsername = value;
                 this.OnPropertyChanged();
             }
         }
@@ -72,6 +80,16 @@
             }
         }
 
+        public static bool IsTesting { get; set; }
+
+        public DatabaseConfiguration? DatabaseConfig {
+            get => this.databaseConfig;
+            set {
+                this.databaseConfig = value;
+                this.OnPropertyChanged();
+            }
+        }
+
         /// <summary>
         ///     The event invoked when properties change.
         /// </summary>
@@ -82,7 +100,7 @@
         /// </summary>
         /// <returns>A new instance of the class.</returns>
         public Configuration Clone() {
-            Configuration config = new Configuration { Username = this.Username, OAuth = this.OAuth?.Clone() };
+            Configuration config = new Configuration { TwitchUsername = this.TwitchUsername, OAuth = this.OAuth?.Clone(), DatabaseConfig = this.DatabaseConfig?.Clone() };
             return config;
         }
 
@@ -90,13 +108,20 @@
         ///     Read the configuration from disk.
         /// </summary>
         /// <returns>The configuration object.</returns>
-        public static Configuration ReadConfiguration() {
-            Configuration? config = null;
+        public static Configuration ReadConfiguration(string? file = null) {
+            if (Configuration.IsTesting && null == file) {
+                return new Configuration();
+            }
 
+            if (null == file) {
+                file = Configuration.CONFIG_FILENAME;
+            }
+
+            Configuration? config = null;
             try {
-                if (File.Exists(Configuration.CONFIG_FILENAME)) {
+                if (File.Exists(file)) {
                     JsonSerializer serializer = new();
-                    using (StreamReader sr = new StreamReader(Configuration.CONFIG_FILENAME))
+                    using (StreamReader sr = new StreamReader(file))
                     using (JsonReader jr = new JsonTextReader(sr)) {
                         config = serializer.Deserialize<Configuration>(jr);
 
@@ -108,6 +133,15 @@
                                 config.OAuth.TokenExpiration
                             );
                         }
+
+                        if (null != config?.DatabaseConfig) {
+                            config.DatabaseConfig = new DatabaseConfiguration(
+                                config.DatabaseConfig.Server,
+                                config.DatabaseConfig.Username,
+                                Encoding.UTF8.GetString(Convert.FromBase64String(config.DatabaseConfig.Password)),
+                                config.DatabaseConfig.Database
+                            );
+                        }
                     }
                 }
             } catch (Exception) { }
@@ -115,6 +149,10 @@
             // If the file doesn't exist or is invalid, make a new configuration.
             if (null == config) {
                 config = new Configuration();
+            }
+
+            if (Configuration.IsTesting) {
+                Configuration.instance = config;
             }
 
             return config;
@@ -125,6 +163,10 @@
         /// </summary>
         /// <returns>True if successful, false otherwise.</returns>
         public bool WriteConfiguration() {
+            if (Configuration.IsTesting) {
+                return false;
+            }
+
             try {
                 var dirName = Path.GetDirectoryName(Configuration.CONFIG_FILENAME);
                 if (null != dirName && !Directory.Exists(dirName)) {
@@ -145,9 +187,19 @@
                         );
                     }
 
+                    if (null != clone.DatabaseConfig) {
+                        clone.DatabaseConfig = new DatabaseConfiguration(
+                            clone.DatabaseConfig.Server,
+                            clone.DatabaseConfig.Username,
+                            null != clone.DatabaseConfig.Password ? Convert.ToBase64String(Encoding.UTF8.GetBytes(clone.DatabaseConfig.Password)) : "",
+                            clone.DatabaseConfig.Database
+                        );
+                    }
+
                     serializer.Serialize(jr, clone);
                 }
-            } catch (Exception) {
+            } catch (Exception e) {
+                Configuration.LOG.Error("Failed to write configuration", e);
                 return false;
             }
 
@@ -209,6 +261,28 @@
             /// <returns>The new object.</returns>
             public OAuthToken Clone() {
                 return new OAuthToken(this.Token, this.RefreshToken, this.TokenExpiration);
+            }
+        }
+
+        public class DatabaseConfiguration {
+            public DatabaseConfiguration(string server, string username, string password, string database) {
+                this.Server = server;
+                this.Username = username;
+                this.Password = password;
+                this.Database = database;
+            }
+
+            public string Server { get; }
+            public string Username { get; }
+            public string Password { get; }
+            public string Database { get; }
+
+            /// <summary>
+            ///     Clones this object.
+            /// </summary>
+            /// <returns>The new object.</returns>
+            public DatabaseConfiguration Clone() {
+                return new DatabaseConfiguration(this.Server, this.Username, this.Password, this.Database);
             }
         }
     }

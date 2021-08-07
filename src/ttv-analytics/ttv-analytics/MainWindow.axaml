@@ -18,12 +18,16 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center">Account</TextBlock>
-            <control:TwitchAccountControl Grid.Row="1" DataContext="{Binding TwitchAccountViewModel}" />
-            <TextBlock Grid.Row="2" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center">Channels User Is In</TextBlock>
-            <control:TwitchChatViewerListControl Grid.Row="3" DataContext="{Binding TwitchChatViewerListViewModel}" />
+            <TextBlock Grid.Row="0" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center">Database</TextBlock>
+            <control:DatabaseConfigurationControl Grid.Row="1" DataContext="{Binding DatabaseConfigurationViewModel}" />
+            <TextBlock Grid.Row="2" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center">Twitch</TextBlock>
+            <control:TwitchAccountControl Grid.Row="3" DataContext="{Binding TwitchAccountViewModel}" />
+            <TextBlock Grid.Row="4" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center">Channels User Is In</TextBlock>
+            <control:TwitchChatViewerListControl Grid.Row="5" DataContext="{Binding TwitchChatViewerListViewModel}" />
         </Grid>
     </DockPanel>
 </Window>

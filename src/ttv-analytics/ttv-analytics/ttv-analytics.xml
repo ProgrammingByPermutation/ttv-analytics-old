@@ -29,6 +29,11 @@
                 The persistent configuration.
             </summary>
         </member>
+        <member name="F:TtvAnalytics.Configuration.LOG">
+            <summary>
+                The logger.
+            </summary>
+        </member>
         <member name="F:TtvAnalytics.Configuration.CONFIG_FILENAME">
             <summary>
                 The location the file should be saved and read from.
@@ -44,9 +49,9 @@
                 The OAuth token information.
             </summary>
         </member>
-        <member name="F:TtvAnalytics.Configuration.username">
+        <member name="F:TtvAnalytics.Configuration.twitchUsername">
             <summary>
-                The username that we are tracking.
+                The twitchUsername that we are tracking.
             </summary>
         </member>
         <member name="M:TtvAnalytics.Configuration.#ctor">
@@ -59,9 +64,9 @@
                 Gets the singleton instance of the configuration.
             </summary>
         </member>
-        <member name="P:TtvAnalytics.Configuration.Username">
+        <member name="P:TtvAnalytics.Configuration.TwitchUsername">
             <summary>
-                Gets or sets the username that we are tracking.
+                Gets or sets the twitchUsername that we are tracking.
             </summary>
         </member>
         <member name="P:TtvAnalytics.Configuration.OAuth">
@@ -80,7 +85,7 @@
             </summary>
             <returns>A new instance of the class.</returns>
         </member>
-        <member name="M:TtvAnalytics.Configuration.ReadConfiguration">
+        <member name="M:TtvAnalytics.Configuration.ReadConfiguration(System.String)">
             <summary>
                 Read the configuration from disk.
             </summary>
@@ -139,6 +144,12 @@
             </summary>
             <returns>The new object.</returns>
         </member>
+        <member name="M:TtvAnalytics.Configuration.DatabaseConfiguration.Clone">
+            <summary>
+                Clones this object.
+            </summary>
+            <returns>The new object.</returns>
+        </member>
         <member name="T:TtvAnalytics.Constants">
             <summary>
                 The constant values used throughout the application.
@@ -169,6 +180,21 @@
                 The reference to the clipboard API.
             </summary>
             <remarks>This is a hack because it's hard to get to.</remarks>
+        </member>
+        <member name="T:TtvAnalytics.Control.DatabaseConfigurationControl">
+            <summary>
+                Visualizes a twitch account.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Control.DatabaseConfigurationControl.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TtvAnalytics.Control.DatabaseConfigurationControl" /> class.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.Control.DatabaseConfigurationControl.InitializeComponent">
+            <summary>
+                Initializes the GUI components.
+            </summary>
         </member>
         <member name="T:TtvAnalytics.Control.TwitchAccountControl">
             <summary>
@@ -234,6 +260,11 @@
             </summary>
             <returns>The Avalonia application.</returns>
         </member>
+        <member name="F:TtvAnalytics.Utilities.DatabaseManager.LOG">
+            <summary>
+                The logger.
+            </summary>
+        </member>
         <member name="T:TtvAnalytics.Utilities.TwitchClient">
             <summary>
                 Wrappers the functionality of interacting with the Twitch API.
@@ -269,7 +300,7 @@
             <param name="usernameFollowing">If specified, the username to find who they are following.</param>
             <param name="usernameBeingFollowed">If specified, the username to find who is following them.</param>
             <remarks>
-                You must specify either the <paramref name="usernameFollowing"/> or the <paramref name="usernameBeingFollowed" />
+                You must specify either the <paramref name="usernameFollowing" /> or the <paramref name="usernameBeingFollowed" />
                 but not both.
             </remarks>
             <returns>A collection of users if successful, null otherwise.</returns>
@@ -280,6 +311,23 @@
             </summary>
             <param name="channelIds">The channel ids to check.</param>
             <returns>The collection of live streams, if successful, null otherwise.</returns>
+        </member>
+        <member name="T:TtvAnalytics.ViewModel.DatabaseConfigurationViewModel">
+            <summary>
+                The view model tracking and updating the.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.ViewModel.DatabaseConfigurationViewModel.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:TtvAnalytics.ViewModel.DatabaseConfigurationViewModel" /> class.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.ViewModel.DatabaseConfigurationViewModel.OnPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+                Handles updating the configuration file with the changes in the GUI.
+            </summary>
+            <param name="sender">This object instance.</param>
+            <param name="e">The event arguments.</param>
         </member>
         <member name="T:TtvAnalytics.ViewModel.MainWindowViewModel">
             <summary>
@@ -299,6 +347,11 @@
         <member name="P:TtvAnalytics.ViewModel.MainWindowViewModel.TwitchChatViewerListViewModel">
             <summary>
                 Gets or sets the view model for the twitch chat viewer.
+            </summary>
+        </member>
+        <member name="P:TtvAnalytics.ViewModel.MainWindowViewModel.DatabaseConfigurationViewModel">
+            <summary>
+                Gets or sets the view model for the database configuration.
             </summary>
         </member>
         <member name="T:TtvAnalytics.ViewModel.TwitchAccountViewModel">
@@ -411,7 +464,12 @@
                 Retrieves the list of users in a channel's chat.
             </summary>
         </member>
-        <member name="M:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.GetChannelsAllFollowersAreIn">
+        <member name="M:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.GetChannelsAllFollowersAreInCommand">
+            <summary>
+                Retrieves the list of all followers of a channel and what chats they're currently in.
+            </summary>
+        </member>
+        <member name="M:TtvAnalytics.ViewModel.TwitchChatViewerListViewModel.GetChannelsAllFollowersAreIn(System.String)">
             <summary>
                 Retrieves the list of all followers of a channel and what chats they're currently in.
             </summary>

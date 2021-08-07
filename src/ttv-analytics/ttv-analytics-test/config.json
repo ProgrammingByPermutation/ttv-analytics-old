@@ -1,0 +1,9 @@
+{
+  "TwitchUsername": "oxcanteven",
+  "DatabaseConfig": {
+    "Server": "localhost",
+    "Username": "<PUT USERNAME HERE>",
+    "Password": "<PUT PASSWORD HERE>",
+    "Database": "ttv_analytics"
+  }
+}

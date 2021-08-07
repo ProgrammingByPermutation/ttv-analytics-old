@@ -10,14 +10,19 @@
     <changeSet id="1" author="J█████">
 		<sql dbms="mysql" splitStatements="true">
 			CREATE TABLE `ttv_analytics`.`twitch_users` (
-			  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-			  `username` VARCHAR(25) NOT NULL,
-			  PRIMARY KEY (`id`));
+			  `id` int unsigned NOT NULL AUTO_INCREMENT,
+			  `username` varchar(25) NOT NULL,
+			  PRIMARY KEY (`id`),
+			  UNIQUE KEY `username_UNIQUE` (`username`)
+			);
+
 			  
 			CREATE TABLE `ttv_analytics`.`twitch_game` (
-			  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-			  `name` VARCHAR(255) NOT NULL,
-			  PRIMARY KEY (`id`));
+			  `id` int unsigned NOT NULL AUTO_INCREMENT,
+			  `name` varchar(255) NOT NULL,
+			  PRIMARY KEY (`id`),
+			  UNIQUE KEY `name_UNIQUE` (`name`)
+			);
 			
 			CREATE TABLE `ttv_analytics`.`twitch_chat_user_log` (
 			  `id` int unsigned NOT NULL AUTO_INCREMENT,

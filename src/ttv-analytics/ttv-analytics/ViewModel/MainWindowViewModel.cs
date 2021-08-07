@@ -9,6 +9,7 @@
         public MainWindowViewModel() {
             this.TwitchAccountViewModel = new TwitchAccountViewModel();
             this.TwitchChatViewerListViewModel = new TwitchChatViewerListViewModel();
+            this.DatabaseConfigurationViewModel = new DatabaseConfigurationViewModel();
         }
 
         /// <summary>
@@ -20,5 +21,10 @@
         ///     Gets or sets the view model for the twitch chat viewer.
         /// </summary>
         public TwitchChatViewerListViewModel TwitchChatViewerListViewModel { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the view model for the database configuration.
+        /// </summary>
+        public DatabaseConfigurationViewModel DatabaseConfigurationViewModel { get; set; }
     }
 }
