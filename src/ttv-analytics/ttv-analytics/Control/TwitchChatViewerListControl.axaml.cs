@@ -1,5 +1,7 @@
 namespace TtvAnalytics.Control {
+    using System.Diagnostics;
     using Avalonia.Controls;
+    using Avalonia.Interactivity;
     using Avalonia.Markup.Xaml;
 
     /// <summary>
@@ -18,6 +20,15 @@ namespace TtvAnalytics.Control {
         /// </summary>
         private void InitializeComponent() {
             AvaloniaXamlLoader.Load(this);
+        }
+
+        private void OpenBrowser(object? sender, RoutedEventArgs e) {
+            ListBox? control = sender as ListBox;
+            if (null == control || string.IsNullOrWhiteSpace(control.SelectedItem?.ToString()) || (control.SelectedItem.ToString()?.Contains(":") ?? true)) {
+                return;
+            }
+
+            Process.Start(new ProcessStartInfo("cmd", $"/c start https://www.twitch.tv/{control.SelectedItem}") { CreateNoWindow = true });
         }
     }
 }

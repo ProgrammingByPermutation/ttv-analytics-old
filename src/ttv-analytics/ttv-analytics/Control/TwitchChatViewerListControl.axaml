@@ -33,6 +33,8 @@
         </Button>
         <ProgressBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Minimum="0" Maximum="100"
                      Value="{Binding QueryProgress}" />
-        <ListBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Items="{Binding TwitchChatters}" />
+        <ListBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Items="{Binding TwitchChatters}" DoubleTapped="OpenBrowser">
+
+        </ListBox>
     </Grid>
 </UserControl>
